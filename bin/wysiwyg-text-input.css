@@ -1,0 +1,46 @@
+input#wysiwyg-text-input {
+  margin: 0;
+  height: 0;
+  padding: 0;
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0); }
+
+input#wysiwyg-text-input:focus,
+textarea#wysiwyg-text-input:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  resize: none; }
+
+#wrapper-wysiwyg-text-input {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  resize: none;
+  padding: 0; }
+  #wrapper-wysiwyg-text-input::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    opacity: 0.5;
+    transform: scaleX(0);
+    background-color: orange;
+    transition: all .3s ease; }
+  #wrapper-wysiwyg-text-input.active::after {
+    transform: scaleX(1); }
+
+.value-cell {
+  width: 100%;
+  height: 100%; }
+
+.value-cell:after {
+  display: inline-block;
+  content: ""; }
