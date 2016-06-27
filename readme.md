@@ -6,6 +6,10 @@ This JavaScript library is where you can enter the characters as if they were ed
 
 [demo page](http://www.crossl.net/wysiwyg-text-input/demo/)
 
+## support browsers
+
+Chrome / Firefox / Safari / Microsoft Edge / Internet Explorer 11.
+
 ## how to use
 
 It can be used only to create an instance.
