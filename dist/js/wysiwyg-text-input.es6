@@ -310,11 +310,11 @@ export default class WysiwygTextInput {
         this._clickElement.innerHTML = this._convertInputToHtml(this._editElement.value);
         this._removeInputNode();
 
-        // if (typeof elementComplete === "string") {
-        //
-        // } else {
-        //     this.options.complete(clickElement);
-        // }
+        if (typeof elementComplete === "string") {
+            global[elementComplete].call(clickElement, clickElement);
+        } else {
+            this.options.complete(clickElement);
+        }
 
     }
 
