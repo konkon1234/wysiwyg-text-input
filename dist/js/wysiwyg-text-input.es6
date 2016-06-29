@@ -9,7 +9,9 @@ export default class WysiwygTextInput {
                 input_field_tag_id: "wysiwyg-text-input",
                 input_field_wrapper_id: "wrapper-wysiwyg-text-input",
                 input_text_attribute_name: "data-input-value",
-                commit_and_next_focus: true
+                commit_and_next_focus: true,
+                complete: function (elem) {
+                }
             }, options);
         this._editWrapperElement = null;
         this._editElement = null;
@@ -55,7 +57,7 @@ export default class WysiwygTextInput {
         if (elem == null) {
             return rect;
         }
-        
+
         rect.left += elem.offsetLeft;
         rect.top += elem.offsetTop;
 
@@ -81,7 +83,7 @@ export default class WysiwygTextInput {
 
     _onTargetClick(e) {
         var editElement
-            ,editWrapperElement;
+            , editWrapperElement;
 
         let clickElement = e.target;
 
@@ -167,9 +169,9 @@ export default class WysiwygTextInput {
         }
 
         let clickElemOffsetRect = this._getObjectOffsetRect(clickElement, {left: 0, top: 0})
-            ,clickElementRect = clickElement.getBoundingClientRect();
+            , clickElementRect = clickElement.getBoundingClientRect();
 
-        var getIntAttr = function(elem, attrName) {
+        var getIntAttr = function (elem, attrName) {
             var val = elem.getAttribute(attrName);
 
             if (val == null) {
@@ -253,9 +255,9 @@ export default class WysiwygTextInput {
 
     _searchNextNode(clickElement, nextCssSelect, searchNext) {
         var nextElement
-            ,valueElements
-            ,i
-            ,nextIndex;
+            , valueElements
+            , i
+            , nextIndex;
 
         if (!this.options.commit_and_next_focus) {
             return;
@@ -267,7 +269,7 @@ export default class WysiwygTextInput {
                 return;
             }
 
-            for (i = 0 ; i < valueElements.length ; i ++) {
+            for (i = 0; i < valueElements.length; i++) {
                 if (valueElements[i] == clickElement) {
                     nextIndex = searchNext ? i + 1 : i - 1;
 
@@ -284,8 +286,7 @@ export default class WysiwygTextInput {
                 }
             }
         }
-        else
-        {
+        else {
             nextElement = document.querySelectorAll(nextCssSelect).item(0);
         }
 
@@ -302,9 +303,19 @@ export default class WysiwygTextInput {
     }
 
     _commit() {
+        var clickElement = this._clickElement,
+            elementComplete = clickElement.getAttribute("data-input-complete");
+
         this._clickElement.setAttribute(this.options.input_text_attribute_name, this._escapeTags(this._editElement.value));
         this._clickElement.innerHTML = this._convertInputToHtml(this._editElement.value);
         this._removeInputNode();
+
+        // if (typeof elementComplete === "string") {
+        //
+        // } else {
+        //     this.options.complete(clickElement);
+        // }
+
     }
 
     get editing() {
@@ -332,4 +343,4 @@ export default class WysiwygTextInput {
     }
 }
 
-window.WysiwygTextInput = WysiwygTextInput;
+global['WysiwygTextInput'] = WysiwygTextInput;

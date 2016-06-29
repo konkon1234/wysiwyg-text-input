@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	"use strict";
+	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -65,7 +65,8 @@
 	            input_field_tag_id: "wysiwyg-text-input",
 	            input_field_wrapper_id: "wrapper-wysiwyg-text-input",
 	            input_text_attribute_name: "data-input-value",
-	            commit_and_next_focus: true
+	            commit_and_next_focus: true,
+	            complete: function complete(elem) {}
 	        }, options);
 	        this._editWrapperElement = null;
 	        this._editElement = null;
@@ -364,9 +365,18 @@
 	    }, {
 	        key: "_commit",
 	        value: function _commit() {
+	            var clickElement = this._clickElement,
+	                elementComplete = clickElement.getAttribute("data-input-complete");
+
 	            this._clickElement.setAttribute(this.options.input_text_attribute_name, this._escapeTags(this._editElement.value));
 	            this._clickElement.innerHTML = this._convertInputToHtml(this._editElement.value);
 	            this._removeInputNode();
+
+	            // if (typeof elementComplete === "string") {
+	            //
+	            // } else {
+	            //     this.options.complete(clickElement);
+	            // }
 	        }
 	    }, {
 	        key: "cancel",
@@ -418,7 +428,8 @@
 	exports.default = WysiwygTextInput;
 
 
-	window.WysiwygTextInput = WysiwygTextInput;
+	global['WysiwygTextInput'] = WysiwygTextInput;
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }
 /******/ ]);
