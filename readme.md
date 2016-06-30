@@ -28,6 +28,8 @@ var wysiwyg_text_input =  new WysiwygTextInput(options);
 | input_text_attribute_name | data-input-value | Set the user input value to this attribute. |
 | commit_and_next_focus | true | When you press Enter, and move the focus to the next input element |
 | complete | | You can pass the processing that will be called at the time of data entry decision. |
+| cancel | | You can pass the processing that will be called at the time of input escape. |
+| click | | You can pass the processing that will be called at the time of click. |
 
 ## DOM element attribute
 
@@ -42,6 +44,8 @@ You can change the behavior in that you set a specific value to the attribute of
 | data-input-add-width | You can fine-tune crowded plus the value set in the position of the input field. Negative values can also be entered. |
 | data-input-add-height | You can fine-tune crowded plus the value set in the position of the input field. Negative values can also be entered. |
 | data-input-complete | You can pass the processing that will be called at the time of data entry decision. |
+| data-input-cancel | You can pass the processing that will be called at the time of input escape. |
+| data-input-click | You can pass the processing that will be called at the time of click. |
 
 ## License
 
