@@ -11,6 +11,10 @@ export default class WysiwygTextInput {
                 input_text_attribute_name: "data-input-value",
                 commit_and_next_focus: true,
                 complete: function (elem) {
+                },
+                click: function (elem) {
+                },
+                cancel: function (elem) {
                 }
             }, options);
         this._editWrapperElement = null;
@@ -154,6 +158,7 @@ export default class WysiwygTextInput {
         clickElement.textContent = "";
 
         editElement.focus();
+        this._callOptionMethod(clickElement, "data-input-click", "click");
 
         // stop parent event notice
         e.stopPropagation();
@@ -310,12 +315,7 @@ export default class WysiwygTextInput {
         this._clickElement.innerHTML = this._convertInputToHtml(this._editElement.value);
         this._removeInputNode();
 
-        if (typeof elementComplete === "string") {
-            global[elementComplete].call(clickElement, clickElement);
-        } else {
-            this.options.complete(clickElement);
-        }
-
+        this._callOptionMethod(clickElement, "data-input-complete", "complete");
     }
 
     get editing() {
@@ -325,6 +325,7 @@ export default class WysiwygTextInput {
     cancel() {
         if (this.editing) {
             this._clickElement.innerHTML = this._convertInputToHtml(this._restoreValue);
+            this._callOptionMethod(this._clickElement, "data-input-cancel", "cancel");
             this._removeInputNode();
         }
     }
@@ -339,6 +340,16 @@ export default class WysiwygTextInput {
             this._editElement = null;
             this._clickElement = null;
             this._restoreValue = null;
+        }
+    }
+
+    _callOptionMethod(elem, attribute_name, option_name) {
+        var elementFunction = elem.getAttribute(attribute_name);
+
+        if (typeof elementFunction === "string") {
+            global[elementFunction].call(elem, elem);
+        } else {
+            this.options[option_name](elem, elem);
         }
     }
 }
